@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Drawing</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<style>
+	td{
+		border:1px solid black;
+		width: 20px;
+		height: 20px;
+	}
+	td.active{
+	}
+	.blue{
+		background-color: blue;
+	}
+	.red{
+		background-color: red;
+	}
+	.green{
+		background-color: green;
+	}
+	#red{
+		background-color: red;
+	}
+	#green{
+		background-color: green;
+	}
+	#blue{
+		background-color: blue;
+	}
+</style>
+
+<script>
+function createTable(selector){
+	var i, j;
+	var $table = $('<table>');
+	for(i=0;i<8;i++){
+		var $tr = $('<tr>');
+		for(j=0;j<8;j++){
+			$tr.append(
+				$('<td>')
+			);
+		}
+		$table.append($tr);
+	}
+	$(selector).append($table);
+}
+
+function createColor(selector){
+	var i;
+	var $table = $('<table>');
+	var $tr = $('<tr>');
+	$tr.append($('<td>').attr('id','red'));
+	$tr.append($('<td>').attr('id','green'));
+	$tr.append($('<td>').attr('id','blue'));
+	$table.append($tr);
+	$(selector).append($table);
+}
+
+var color;
+
+$(document).on('click', '#red', function(e){
+		color = 'red';
+})
+
+$(document).on('click', '#green', function(e){
+		color = 'green';
+})
+
+$(document).on('click', '#blue', function(e){
+		color = 'blue';
+})
+
+$(document).on('click', 'td', function(e){
+		if($(this).hasClass(color)){
+			$(this).removeClass(color);
+		}
+		else{
+			$(this).removeClass();
+			$(this).addClass(color);
+		}
+})
+
+window.onload = function(){
+	createTable('#tableholder');
+	createColor('#colorholder');
+}
+</script>
+
+
+</head>
+<body>
+  <div id="tableholder"></div>
+  <div id="colorholder"></div>
+  <input type="submit" value="Save" id="saveButton">
+  <input type="submit" value="Load" id="loadButton">
+</body>
+
+</html>
