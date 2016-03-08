@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>apiTest</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+	window.onload = function(){
+		$.post( "http://music.elvis.hu/drawapi/store.php", { name: "nb8", app: "nbApp", data: "nbString" },
+		function(response){
+			if(response.state == 'ok'){
+				alert('done');
+			}else{
+				alert('error');
+			}
+		});
+	}
+</script>
+</head>
+<body>
+</body>
+</html>
