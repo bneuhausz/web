@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<style type="text/css">
+td{
+		border:1px solid black;
+		width: 32px;
+		height: 32px;
+	}
+td.desert{
+	background-image: url("desert1.png");
+}
+td.grass{
+	background-image: url("grass.png");
+}
+
+td.visible{
+	background-image: url("explode.gif");
+}
+</style>
+<script>
+function createTable(selector){
+	var i, j;
+	var idCounter=0;
+	var $table = $('<table>');
+	for(i=0;i<10;i++){
+		var $tr = $('<tr>');
+		for(j=0;j<10;j++){
+			$tr.append(
+				$('<td class = "desert" id = '+idCounter+'>')
+			);
+			idCounter++;
+		}
+		$table.append($tr);
+	}
+	$(selector).append($table);
+}
+
+function makeBomb(){
+	var i;
+	var rand = 0;
+	for(i=0;i<=10;i++){
+		rand=Math.floor(Math.random()*100);
+		var bombCell = $('#tableholder').find('#'+rand);
+		if(bombCell.hasClass("bomb")){
+			$('#tableholder').find('#'+rand+1)
+		}
+		else{
+			bombCell.addClass("bomb");
+		}
+		rand=0;
+	}
+}
+
+$(document).on('click', 'td', function(e){
+		if($(this).hasClass("bomb")){
+			$('.bomb').each(function(){
+				$(this).addClass("visible");});
+
+		}
+		else{
+			$(this).addClass("grass");
+		}
+})
+
+
+
+window.onload = function(){
+	createTable('#tableholder');
+	makeBomb();
+}
+</script>
+</head>
+<body>
+  <div id="tableholder"></div>
+</body>
+
+</html>
